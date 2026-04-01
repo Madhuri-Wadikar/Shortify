@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import React from "react"; 
+// import React from "react"; 
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Card from "./Card";
 import { useStoreContext } from "../contextApi/ContextApi";
@@ -13,11 +14,11 @@ const LandingPage = () => {
   console.log("TOKEN FROM LANDING PAGE : " +token);
 
   const dashBoardNavigateHandler = () => {
-    useEffect(() => {
-      const localToken = localStorage.getItem("JWT_TOKEN");
-      console.log("Check LocalStorage directly:", localToken);
-      console.log("Check Context Token:", token);
-  }, [token]);
+  //   useEffect(() => {
+  //     const localToken = localStorage.getItem("JWT_TOKEN");
+  //     console.log("Check LocalStorage directly:", localToken);
+  //     console.log("Check Context Token:", token);
+  // }, [token]);
   
     if (!token) {
       navigate("/login");   // redirect to login if user not logged in
@@ -25,6 +26,14 @@ const LandingPage = () => {
       navigate("/dashboard"); // if logged in go to dashboard
     }
   };
+
+  // const dashBoardNavigateHandler = () => {
+  //   if (!token) {
+  //     navigate("/login");
+  //   } else {
+  //     navigate("/dashboard");
+  //   }
+  // };
   return (
     <div className="min-h-[calc(100vh-64px)]  lg:px-14 sm:px-8 px-4">
       <div className="lg:flex-row flex-col    lg:py-5   pt-16   lg:gap-10 gap-8 flex justify-between items-center">
@@ -73,7 +82,14 @@ const LandingPage = () => {
               }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              onClick={dashBoardNavigateHandler}
+              // onClick={dashBoardNavigateHandler}
+              onClick={() => {
+                if (!token) {
+                  navigate("/login");
+                } else {
+                  navigate("/dashboard");
+                }
+              }}
               className="border-btnColor border w-40 text-btnColor rounded-md  py-2 "
             >
               Create Short Link
