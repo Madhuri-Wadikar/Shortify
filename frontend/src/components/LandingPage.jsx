@@ -12,7 +12,7 @@ const LandingPage = () => {
   const navigate = useNavigate();
   const { token } = useStoreContext();
   console.log("TOKEN FROM LANDING PAGE : " +token);
-
+  console.log("ENV DOMAIN:", import.meta.env.VITE_REACT_SUBDOMAIN);
   const dashBoardNavigateHandler = () => {
   //   useEffect(() => {
   //     const localToken = localStorage.getItem("JWT_TOKEN");

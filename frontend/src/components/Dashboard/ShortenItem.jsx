@@ -20,10 +20,13 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
     const [selectedUrl, setSelectedUrl] = useState("");
     const [analyticsData, setAnalyticsData] = useState([]);
 
-    const subDomain = import.meta.env.VITE_REACT_FRONT_END_URL.replace(
-        /^https?:\/\//,
-        ""
-      );
+    // const subDomain = import.meta.env.VITE_REACT_FRONT_END_URL.replace(
+    //     /^https?:\/\//,
+    //     ""
+    //   );
+    const domain = import.meta.env.VITE_REACT_SUBDOMAIN || "";
+
+const subDomain = domain.replace(/^https?:\/\//, "");
       useEffect(() => {
         if (selectedUrl) {
             fetchMyShortUrl();
@@ -85,7 +88,9 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
             <Link
               target='_'
               className='text-[17px]  font-montserrat font-[600] text-linkColor'
-              to={import.meta.env.VITE_REACT_FRONT_END_URL + "/s/" + `${shortUrl}`}>
+              //  to={import.meta.env.VITE_REACT_FRONT_END_URL + "/s/" + `${shortUrl}`}
+              to={import.meta.env.VITE_REACT_SUBDOMAIN + "/s/" + shortUrl}
+               >
                   {subDomain + "/s/" + `${shortUrl}`}
             </Link>
             <FaExternalLinkAlt className="text-linkColor" />
@@ -122,7 +127,8 @@ const ShortenItem = ({ originalUrl, shortUrl, clickCount, createdDate }) => {
         <div className="flex  flex-1  sm:justify-end items-center gap-4">
             <CopyToClipboard
                 onCopy={() => setIsCopied(true)}
-                text={`${import.meta.env.VITE_REACT_FRONT_END_URL + "/s/" + `${shortUrl}`}`}
+                text={`${import.meta.env.VITE_REACT_SUBDOMAIN + "/s/" + shortUrl}`}
+                // text={`${import.meta.env.VITE_REACT_FRONT_END_URL + "/s/" + `${shortUrl}`}`}
             >
                 <div className="flex cursor-pointer gap-1 items-center bg-gradient-to-r from-blue-500 to-purple-600 py-2  font-semibold shadow-md shadow-slate-500 px-6 rounded-md text-white ">
                 <button className="">{isCopied ? "Copied" : "Copy"}</button>
